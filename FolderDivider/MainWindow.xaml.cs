@@ -69,6 +69,7 @@ namespace FolderDivider
 
         private void OnDivide_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            DivideBTN.IsEnabled = false;
             _Model.filelist = new List<string>(_Model.TotalNums);
             _Model.GetFilesName(_Model.InputPath);
             int[] array = new int[_Model.TotalNums];
@@ -92,6 +93,7 @@ namespace FolderDivider
             }
             progressbar.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(progressbar.SetValue), System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, 0.0);
             MessageBox.Show("操作完成", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            DivideBTN.IsEnabled = true;
         }
         private Model _Model;
     }
