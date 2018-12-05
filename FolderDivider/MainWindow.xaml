@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FolderDivider"
         mc:Ignorable="d"
-        Title="MainWindow" Height="150" Width="300">
+        Title="FolderDivider" Height="150" Width="350">
     <Window.Resources>
         <RoutedCommand x:Key="SetInputPath"/>
         <RoutedCommand x:Key="SetOutPath"/>
@@ -25,24 +25,24 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Margin="2">
             <Button DockPanel.Dock="Right" Command="{StaticResource SetInputPath}" Content="输入文件夹" Margin="2,0,2,0"></Button>
-            <TextBox VerticalContentAlignment="Center" Text="{Binding InputPath,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
+            <TextBox VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding InputPath,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
         </DockPanel>
         <DockPanel Grid.Row="1" Margin="2">
             <Button DockPanel.Dock="Right" Command="{StaticResource SetOutPath}" Content="输出文件夹" Margin="2,0,2,0"></Button>
-            <TextBox VerticalContentAlignment="Center" Text="{Binding OutPath,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
+            <TextBox VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding OutPath,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
         </DockPanel>
         <DockPanel Grid.Row="2" Margin="2">
             <Label DockPanel.Dock="Left" Content="总数:"/>
-            <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" Text="{Binding TotalNums,UpdateSourceTrigger=PropertyChanged}" MinWidth="70"/>
+            <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding TotalNums,UpdateSourceTrigger=PropertyChanged}" MinWidth="70"/>
             <Label DockPanel.Dock="Left" Content="进度"/>
-            <ProgressBar VerticalContentAlignment="Center" Value="{Binding Percent,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
+            <ProgressBar VerticalContentAlignment="Center" Name="progressbar" MinWidth="100"/>
         </DockPanel>
         <DockPanel Grid.Row="3" Margin="2">
-            <Label DockPanel.Dock="Left" Content="比例"/>
-            <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" Text="{Binding Percent,UpdateSourceTrigger=PropertyChanged}" MinWidth="50"/>
+            <Label DockPanel.Dock="Left" Content="百分比"/>
+            <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" Text="{Binding Percent,UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
             <Label DockPanel.Dock="Left" Content="或数量"/>
             <Button DockPanel.Dock="Right" Command="{StaticResource Divide}" Content="开始划分" Margin="2,0,2,0"></Button>
-            <TextBox  VerticalContentAlignment="Center" Text="{Binding Nums,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
+            <TextBox  VerticalContentAlignment="Center" Text="{Binding Nums,UpdateSourceTrigger=PropertyChanged}" MinWidth="50"/>
         </DockPanel>
     </Grid>
 </Window>
