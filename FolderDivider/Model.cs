@@ -64,19 +64,31 @@ namespace FolderDivider
             }
         }
 
-        public void GetRandomByGuid(int[] array)
+        public  List<T> GetRandomList<T>(List<T> inputList)
         {
-            int len = array.Length;
-            Random random = new Random(GetRandomSeedbyGuid());
-            for (int i = 0; i < len; i++)
-            {
-                array[i] = random.Next(0, len);
-            }
-        }
+            //Copy to a array
+            T[] copyArray = new T[inputList.Count];
+            inputList.CopyTo(copyArray);
 
-        public int GetRandomSeedbyGuid()
-        {
-            return new Guid().GetHashCode();
+            //Add range
+            List<T> copyList = new List<T>();
+            copyList.AddRange(copyArray);
+
+            //Set outputList and random
+            List<T> outputList = new List<T>();
+            Random rd = new Random(DateTime.Now.Millisecond);
+
+            while (copyList.Count > 0)
+            {
+                //Select an index and item
+                int rdIndex = rd.Next(0, copyList.Count - 1);
+                T remove = copyList[rdIndex];
+
+                //remove it from copyList and add it to output
+                copyList.Remove(remove);
+                outputList.Add(remove);
+            }
+            return outputList;
         }
         #endregion
 

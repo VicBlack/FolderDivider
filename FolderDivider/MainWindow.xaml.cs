@@ -72,22 +72,21 @@ namespace FolderDivider
             DivideBTN.IsEnabled = false;
             _Model.filelist = new List<string>(_Model.TotalNums);
             _Model.GetFilesName(_Model.InputPath);
-            int[] array = new int[_Model.TotalNums];
             double progs;
-            _Model.GetRandomByGuid(array);
             string outpath1 = _Model.OutPath + @"\1_" + _Model.Percent.ToString();
             string outpath2 = _Model.OutPath + @"\2_" + (100 - _Model.Percent).ToString();
             Directory.CreateDirectory(outpath1);
             Directory.CreateDirectory(outpath2);
+            List<string> randomfilelist = _Model.GetRandomList(_Model.filelist);
             for (int i = 0; i < _Model.Nums; i++)
             {
-                File.Copy(_Model.filelist[i].ToString(), outpath1 + @"\" + System.IO.Path.GetFileName(_Model.filelist[i].ToString()), true);
+                File.Copy(randomfilelist[i].ToString(), outpath1 + @"\" + System.IO.Path.GetFileName(randomfilelist[i].ToString()), true);
                 progs = i * 100.0 / _Model.TotalNums;
                 progressbar.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(progressbar.SetValue), System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, progs);
             }
             for (int i = _Model.Nums; i < _Model.TotalNums; i++)
             {
-                File.Copy(_Model.filelist[i].ToString(), outpath2 + @"\" + System.IO.Path.GetFileName(_Model.filelist[i].ToString()), true);
+                File.Copy(randomfilelist[i].ToString(), outpath2 + @"\" + System.IO.Path.GetFileName(randomfilelist[i].ToString()), true);
                 progs = i * 100.0 / _Model.TotalNums;
                 progressbar.Dispatcher.Invoke(new Action<System.Windows.DependencyProperty, object>(progressbar.SetValue), System.Windows.Threading.DispatcherPriority.Background, ProgressBar.ValueProperty, progs);
             }
